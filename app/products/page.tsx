@@ -7,7 +7,7 @@ export default function ProductsPage() {
   return (
     <div className="flex flex-col items-center px-8">
       <h1 className='text-2xl my-8'>Products</h1>
-      <div className='flex flex-wrap justify-center md:justify-start gap-4'>
+      <div className='flex flex-wrap w-full justify-center md:justify-start gap-4'>
         {products.map(item => (
         <Link 
         href={'/products/' + item.id} 
