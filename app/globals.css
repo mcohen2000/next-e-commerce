@@ -6,6 +6,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  overflow-x: hidden;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,6 +18,9 @@
 }
 
 body {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
