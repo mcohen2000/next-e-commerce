@@ -11,7 +11,7 @@ export default function ProductsPage() {
         {products.map(item => (
         <Link 
         href={'/products/' + item.id} 
-        className='flex flex-col items-center gap-3 p-4 bg-opacity-10 bg-gray-500' 
+        className='flex flex-col items-center gap-3 p-4 bg-opacity-10 bg-gray-200' 
         key={item.id}>
           <Image
             src={item.images[0]}
