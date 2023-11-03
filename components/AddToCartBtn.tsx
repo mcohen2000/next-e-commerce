@@ -1,13 +1,19 @@
 "use client";
+import { useEffect } from 'react';
 import { CartItem, Product } from "@/app/lib/products/types";
 
 export default function AddToCartBtn({ item, size }:{item: Product, size:string}) {
-    let localCart: string | null = window.localStorage.getItem("next-cart");
+    let localCart: string | null ; 
     let products: CartItem[] | null;
-    if(localCart){
-        products = JSON.parse(localCart).products
-        console.log(products)
-    }
+    useEffect(() => {
+        localCart = window.localStorage.getItem("next-cart");
+        if(localCart){
+            products = JSON.parse(localCart).products
+            console.log(products)
+        }
+      
+    }, [])
+    
   function addToCart() {
     if (products){
         products= [{ product: item, size: size, quantity: 1 }, ...products];
