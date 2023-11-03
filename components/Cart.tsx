@@ -1,10 +1,17 @@
 'use client'
 
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react"
 
 export default function Cart() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const [prevPath, setPrevPath] = useState(pathname);
   useEffect(() => {
+    if(isOpen && pathname !== prevPath){
+      setIsOpen(false);
+      setPrevPath(pathname);
+    }
     if (isOpen) {
       document.body.classList.add("overflow-y-hidden")
       setTimeout(() => {
@@ -16,7 +23,7 @@ export default function Cart() {
         document.getElementsByTagName('nav')[0].classList.add("backdrop-blur-md")
       }, 50)
     }
-  }, [isOpen])
+  }, [isOpen, pathname])
   
   return (<>
     <div className="p-2 border rounded-md cursor-pointer relative" onClick={() => setIsOpen(true)}>
