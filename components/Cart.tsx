@@ -8,6 +8,51 @@ export default function Cart() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const pathname = usePathname();
   const [prevPath, setPrevPath] = useState(pathname);
+  function increaseQuantity(item: CartItem) {
+    let updatedCart: CartItem[];
+    setCart((prev) => {
+      updatedCart = prev.map((arrItem) =>
+        arrItem.product.id === item.product.id && arrItem.size === item.size
+          ? (arrItem = { ...arrItem, quantity: arrItem.quantity + 1 })
+          : arrItem
+      );
+      window.localStorage.setItem(
+        "next-cart",
+        JSON.stringify({ products: updatedCart })
+      );
+      return updatedCart;
+    });
+  }
+  function decreaseQuantity(item: CartItem) {
+    let updatedCart;
+    if (item.quantity === 1) {
+      setCart((prev) => {
+        updatedCart = prev.filter(
+          (arrItem) =>
+            arrItem.product.id !== item.product.id || arrItem.size !== item.size
+        );
+        window.localStorage.setItem(
+          "next-cart",
+          JSON.stringify({ products: updatedCart })
+        );
+        return updatedCart;
+      });
+    } else {
+      setCart((prev) => {
+        updatedCart = prev.map((arrItem) =>
+          arrItem.product.id === item.product.id && arrItem.size === item.size
+            ? (arrItem = { ...arrItem, quantity: arrItem.quantity - 1 })
+            : arrItem
+        );
+        window.localStorage.setItem(
+          "next-cart",
+          JSON.stringify({ products: updatedCart })
+        );
+        return updatedCart;
+      });
+    }
+  }
+
   useEffect(() => {
     let localCart: string | null = window.localStorage.getItem("next-cart");
     if (isOpen && pathname !== prevPath) {
@@ -90,9 +135,9 @@ export default function Cart() {
             cart.map((item, index) => (
               <div
                 key={index}
-                className='flex justify-between border-b border-neutral-500 p-3 w-full'
+                className='flex justify-between border-b border-neutral-500 py-3 w-full'
               >
-                <div className="flex gap-4">
+                <div className='flex gap-2'>
                   <div className='bg-opacity-10 bg-gray-200 p-3'>
                     <img
                       className=''
@@ -104,12 +149,66 @@ export default function Cart() {
                   </div>
                   <div>
                     <p>{item.product.name}</p>
-                    <p>Size: {item.size}</p>
+                    <p className='text-sm text-neutral-400'>{item.size}</p>
                   </div>
                 </div>
-                <div>
-                  <p className="text-right">${item.product.price * item.quantity}</p>
-                  <p className="text-right">Quantity: {item.quantity}</p>
+                <div className='flex flex-col justify-between'>
+                  <p className='text-right'>
+                    ${item.product.price * item.quantity}
+                  </p>
+                  <div className='flex justify-between items-center w-15 border rounded-full overflow-hidden'>
+                    <button
+                      className='px-3 py-2'
+                      onClick={() => {
+                        decreaseQuantity(item);
+                        window.localStorage.setItem(
+                          "next-cart",
+                          JSON.stringify({ products: cart })
+                        );
+                      }}
+                    >
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        strokeWidth={1.5}
+                        stroke='currentColor'
+                        className='w-4 h-4'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          d='M19.5 12h-15'
+                        />
+                      </svg>
+                    </button>
+                    <p className='p-1'>{item.quantity}</p>
+                    <button
+                      className='px-3 py-2'
+                      onClick={() => {
+                        increaseQuantity(item);
+                        window.localStorage.setItem(
+                          "next-cart",
+                          JSON.stringify({ products: cart })
+                        );
+                      }}
+                    >
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        strokeWidth={1.5}
+                        stroke='currentColor'
+                        className='w-4 h-4'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          d='M12 4.5v15m7.5-7.5h-15'
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
             ))
