@@ -52,6 +52,11 @@ export default function Cart() {
       });
     }
   }
+  function getTotal(){
+    let total = 0;
+    cart.forEach((item) => total += item.product.price*item.quantity);
+    return total
+  }
 
   useEffect(() => {
     let localCart: string | null = window.localStorage.getItem("next-cart");
@@ -130,7 +135,7 @@ export default function Cart() {
             </svg>
           </div>
         </div>
-        <div className='flex flex-col flex-grow w-full justify-start items-center py-10 z-50'>
+        <div className='flex flex-col flex-grow w-full justify-start items-center my-5 z-50 overflow-auto'>
           {cart.length > 0 ? (
             cart.map((item, index) => (
               <div
@@ -154,7 +159,7 @@ export default function Cart() {
                 </div>
                 <div className='flex flex-col justify-between'>
                   <p className='text-right'>
-                    ${item.product.price * item.quantity}
+                    ${(item.product.price * item.quantity).toFixed(2)}
                   </p>
                   <div className='flex justify-between items-center w-15 border rounded-full overflow-hidden'>
                     <button
@@ -234,6 +239,23 @@ export default function Cart() {
             </>
           )}
         </div>
+        {cart.length > 0 ? 
+        <div className='mt-auto w-full py-2'>
+          <div className='flex justify-between border-b border-b-neutral-500 pb-1 mb-3'>
+            <p>Taxes</p>
+            <p>$0.00</p>
+          </div>
+          <div className='flex justify-between border-b border-b-neutral-500 pb-1 mb-3'>
+            <p>Shipping</p>
+            <p>$0.00</p>
+          </div>
+          <div className='flex justify-between border-b border-b-neutral-500 pb-1 mb-3'>
+            <p>Total</p>
+            <p>${getTotal().toFixed(2)}</p>
+          </div>
+          <button className="w-full bg-red-600 p-3 rounded-full mt-2">Proceed to Checkout</button>
+        </div>
+          : <></>}
       </div>
     </>
   );
