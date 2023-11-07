@@ -108,7 +108,7 @@ export default function Cart() {
       </div>
       {/* Cart Menu */}
       <div
-        className={`flex flex-col items-center absolute z-50 top-0 bottom-0 right-[-1px] w-[calc(100vw+1px)] md:w-[375px] h-screen bg-black bg-opacity-80 backdrop-blur-md border-l p-6 ${
+        className={`flex flex-col items-center absolute z-50 top-0 bottom-0 right-[-1px] w-[calc(100vw+1px)] md:w-[375px] h-screen bg-black bg-opacity-90 backdrop-blur-md border-l p-6 ${
           isOpen
             ? "translate-x-[calc(-1px)] md:translate-x-0"
             : "translate-x-full"
@@ -241,7 +241,7 @@ export default function Cart() {
           )}
         </div>
         {cart.length > 0 ? 
-        <div className='mt-auto w-full py-2'>
+        <div className='mt-auto w-full pt-2'>
           <div className='flex justify-between border-b border-b-neutral-500 pb-1 mb-3'>
             <p>Taxes</p>
             <p>$0.00</p>

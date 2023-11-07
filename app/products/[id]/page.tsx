@@ -35,7 +35,7 @@ export default function ProductPage({
             <Link
               key={`${size}-sizeBtn`}
               href={`?size=${size}`}
-              className={`px-3 py-1 border rounded-3xl ${
+              className={`px-3 py-1 border rounded-full ${
                 selectedSize === size
                   ? "bg-red-600 text-white"
                   : "bg-gray-400 text-black"
