@@ -61,8 +61,8 @@ export default function Cart() {
   useEffect(() => {
     let localCart: string | null = window.localStorage.getItem("next-cart");
     if (isOpen && pathname !== prevPath) {
-      setIsOpen(false);
       setPrevPath(pathname);
+      setIsOpen(false);
     }
     if (isOpen) {
       document.body.classList.add("overflow-y-hidden");
@@ -82,6 +82,7 @@ export default function Cart() {
     if (localCart) {
       setCart(JSON.parse(localCart).products);
     }
+    setPrevPath(pathname);
   }, [isOpen, pathname]);
 
   return (
