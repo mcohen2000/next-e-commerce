@@ -108,10 +108,10 @@ export default function Cart() {
       </div>
       {/* Cart Menu */}
       <div
-        className={`flex flex-col items-center absolute z-50 top-0 bottom-0 right-[-1px] w-[calc(100vw+1px)] md:w-[375px] h-screen bg-black bg-opacity-90 backdrop-blur-md border-l p-6 ${
+        className={`flex flex-col items-center absolute z-50 top-0 bottom-0 right-[calc(-100%-1px)] md:right-[-375px] w-[calc(100vw+1px)] md:w-[375px] h-screen bg-black bg-opacity-90 backdrop-blur-md border-l p-6 ${
           isOpen
-            ? "translate-x-[calc(-1px)] md:translate-x-0"
-            : "translate-x-full"
+            ? "-translate-x-full md:translate-x-[-375px]"
+            : "translate-x-0"
         } transition-transform ease-in-out duration-500`}
       >
         <div className='flex w-full justify-between items-center'>
