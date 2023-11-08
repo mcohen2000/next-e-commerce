@@ -4,7 +4,7 @@ export const products:Product[] = [
     {
         id: 'white-logo-black-tee',
         name: 'White Logo Black Tee',
-        category: 'clothes',
+        category: 'Clothes',
         price: 14.99,
         description: ['Polyester 50%, Cotton 50%', 'Machine wash cold, tumble dry low'],
         sizes: ['XS', 'S', 'M', 'L'],
@@ -13,7 +13,7 @@ export const products:Product[] = [
     {
         id: 'black-logo-white-tee',
         name: 'Black Logo White Tee',
-        category: 'clothes',
+        category: 'Clothes',
         price: 14.99,
         description: ['Polyester 50%, Cotton 50%', 'Machine wash cold, tumble dry low'],
         sizes: ['XS', 'S', 'M', 'L'],
@@ -22,7 +22,7 @@ export const products:Product[] = [
     {
         id: 'white-logo-sticker',
         name: 'White Logo Sticker',
-        category: 'misc',
+        category: 'Stickers',
         price: 4.99,
         description: ['XS: 3x3"', 'S: 4x4"', 'M:6x6"', 'L: 9x9"', 'XL: 12x12"'],
         sizes: ['XS', 'S', 'M', 'L', 'XL'],
@@ -31,7 +31,7 @@ export const products:Product[] = [
     {
         id: 'black-logo-sticker',
         name: 'Black Logo Sticker',
-        category: 'misc',
+        category: 'Stickers',
         price: 4.99,
         description: ['XS: 3x3"', 'S: 4x4"', 'M:6x6"', 'L: 9x9"', 'XL: 12x12"'],
         sizes: ['XS', 'S', 'M', 'L', 'XL'],
