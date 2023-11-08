@@ -1,12 +1,13 @@
 "use client";
 import { CartItem } from "@/app/lib/products/types";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Cart() {
   const [isOpen, setIsOpen] = useState(false);
   const [cart, setCart] = useState<CartItem[]>([]);
   const pathname = usePathname();
+  const cartRef = useRef<HTMLDivElement>(null);
   const [prevPath, setPrevPath] = useState(pathname);
   function increaseQuantity(item: CartItem) {
     let updatedCart: CartItem[];
@@ -52,11 +53,34 @@ export default function Cart() {
       });
     }
   }
-  function getTotal(){
+  function getTotal() {
     let total = 0;
-    cart.forEach((item) => total += item.product.price*item.quantity);
-    return total
+    cart.forEach((item) => (total += item.product.price * item.quantity));
+    return total;
   }
+  useEffect(() => {
+    function handleClickOff(e: MouseEvent) {
+      const targetNode = e.target as Node;
+      if (cartRef.current && !cartRef.current.contains(targetNode)) {
+        setIsOpen(false);
+        document.body.style.overflow = "";
+      }
+    }
+    function onEscapeKey(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        setIsOpen(false);
+        document.body.style.overflow = "";
+      }
+    }
+    if (isOpen) {
+      document.addEventListener("mouseup", handleClickOff, true);
+      document.addEventListener("keydown", onEscapeKey, true);
+    }
+    return () => {
+      document.removeEventListener("mouseup", handleClickOff, true);
+      document.removeEventListener("keydown", onEscapeKey, true);
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     let localCart: string | null = window.localStorage.getItem("next-cart");
@@ -109,10 +133,9 @@ export default function Cart() {
       {/* Cart Menu */}
       <div
         className={`flex flex-col items-center absolute z-50 top-0 bottom-0 right-[calc(-100%-1px)] md:right-[-375px] w-[calc(100vw+1px)] md:w-[375px] h-screen bg-black bg-opacity-90 backdrop-blur-md border-l p-6 ${
-          isOpen
-            ? "-translate-x-full md:translate-x-[-375px]"
-            : "translate-x-0"
+          isOpen ? "-translate-x-full md:translate-x-[-375px]" : "translate-x-0"
         } transition-transform ease-in-out duration-500`}
+        ref={cartRef}
       >
         <div className='flex w-full justify-between items-center'>
           <h2 className='font-extrabold text-2xl'>Shopping Cart</h2>
@@ -240,23 +263,27 @@ export default function Cart() {
             </>
           )}
         </div>
-        {cart.length > 0 ? 
-        <div className='mt-auto w-full pt-2'>
-          <div className='flex justify-between border-b border-b-neutral-500 pb-1 mb-3'>
-            <p>Taxes</p>
-            <p>$0.00</p>
+        {cart.length > 0 ? (
+          <div className='mt-auto w-full pt-2'>
+            <div className='flex justify-between border-b border-b-neutral-500 pb-1 mb-3'>
+              <p>Taxes</p>
+              <p>$0.00</p>
+            </div>
+            <div className='flex justify-between border-b border-b-neutral-500 pb-1 mb-3'>
+              <p>Shipping</p>
+              <p>$0.00</p>
+            </div>
+            <div className='flex justify-between border-b border-b-neutral-500 pb-1 mb-3'>
+              <p>Total</p>
+              <p>${getTotal().toFixed(2)}</p>
+            </div>
+            <button className='w-full bg-red-600 p-3 rounded-full mt-2'>
+              Proceed to Checkout
+            </button>
           </div>
-          <div className='flex justify-between border-b border-b-neutral-500 pb-1 mb-3'>
-            <p>Shipping</p>
-            <p>$0.00</p>
-          </div>
-          <div className='flex justify-between border-b border-b-neutral-500 pb-1 mb-3'>
-            <p>Total</p>
-            <p>${getTotal().toFixed(2)}</p>
-          </div>
-          <button className="w-full bg-red-600 p-3 rounded-full mt-2">Proceed to Checkout</button>
-        </div>
-          : <></>}
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );
