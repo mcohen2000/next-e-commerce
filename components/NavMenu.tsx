@@ -43,10 +43,10 @@ export default function NavMenu() {
       </div>
       {/* Nav Menu */}
       <div
-        className={`flex md:hidden flex-col items-center absolute z-50 top-0 bottom-0 left-[-1px] w-[calc(100vw+1px)] md:w-[375px] h-screen bg-black bg-opacity-90 backdrop-blur-md border-r p-6 ${
+        className={`flex md:hidden flex-col items-center absolute z-50 top-0 bottom-0 -left-[calc(100vw+1px)] w-[calc(100vw+1px)] md:w-[375px] h-screen bg-black bg-opacity-90 backdrop-blur-md border-r p-6 ${
           isOpen
-            ? "translate-x-[calc(1px)] md:translate-x-0"
-            : "translate-x-[-100%]"
+            ? "translate-x-[calc(100vw+1px)]"
+            : "translate-x-0"
         } transition-transform ease-in-out duration-500`}
       >
         <div className='flex w-full justify-between items-center'>
