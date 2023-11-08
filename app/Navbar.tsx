@@ -13,6 +13,8 @@ export default function Navbar() {
                 <Image src={'/m-logo-white.png'} width={38} height={38} alt={'navbar logo'} />
             </Link>
             <Link href={'/products'} className="group md:flex hidden justify-center align-center px-2 "><div className="group-hover:border-b border-white">All Products</div></Link>
+            <Link href={'/products/clothes'} className="group md:flex hidden justify-center align-center px-2 "><div className="group-hover:border-b border-white">Clothes</div></Link>
+            <Link href={'/products/stickers'} className="group md:flex hidden justify-center align-center px-2 "><div className="group-hover:border-b border-white">Stickers</div></Link>
         </div>
         <Cart/>
         

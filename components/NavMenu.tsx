@@ -73,6 +73,8 @@ export default function NavMenu() {
         </div>
         <div className='flex flex-col flex-grow w-full justify-start items-start my-5 z-50 overflow-auto text-xl'>
         <Link href={'/products'} className="group flex justify-center align-center py-2 "><div className="group-hover:border-b border-white">All Products</div></Link>
+        <Link href={'/products/clothes'} className="group flex justify-center align-center py-2 "><div className="group-hover:border-b border-white">Clothes</div></Link>
+        <Link href={'/products/stickers'} className="group flex justify-center align-center py-2 "><div className="group-hover:border-b border-white">Stickers</div></Link>
         </div>
       </div>
     </>
