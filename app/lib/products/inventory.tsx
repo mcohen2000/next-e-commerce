@@ -7,7 +7,7 @@ export const products:Product[] = [
         category: 'Clothes',
         price: 14.99,
         description: ['Polyester 50%, Cotton 50%', 'Machine wash cold, tumble dry low'],
-        sizes: ['XS', 'S', 'M', 'L'],
+        sizes: ['XS', 'S', 'M', 'L', 'XL'],
         images: ['/m-logo-white-black-tee.png']
     },
     {
@@ -16,7 +16,7 @@ export const products:Product[] = [
         category: 'Clothes',
         price: 14.99,
         description: ['Polyester 50%, Cotton 50%', 'Machine wash cold, tumble dry low'],
-        sizes: ['XS', 'S', 'M', 'L'],
+        sizes: ['XS', 'S', 'M', 'L', 'XL'],
         images: ['/m-logo-black-white-tee.png']
     },
     {
