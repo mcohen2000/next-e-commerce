@@ -58,6 +58,17 @@ export default function Cart() {
     cart.forEach((item) => (total += item.product.price * item.quantity));
     return total;
   }
+  function handleCheckout() {
+    fetch("/api/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({cart: cart})
+    })
+      .then((res) => res.json())
+      .then((data) => window.location.assign(data));
+  }
   useEffect(() => {
     function handleClickOff(e: MouseEvent) {
       const targetNode = e.target as Node;
@@ -132,8 +143,8 @@ export default function Cart() {
       </div>
       {/* Cart Menu */}
       <div
-        className={`flex flex-col items-center absolute z-50 top-0 bottom-0 right-[calc(-100%-1px)] md:right-[-375px] w-[calc(100vw+1px)] md:w-[375px] h-screen bg-black bg-opacity-90 backdrop-blur-md border-l p-6 ${
-          isOpen ? "-translate-x-full md:translate-x-[-375px]" : "translate-x-0"
+        className={`flex flex-col items-center absolute z-50 top-0 bottom-0 -right-[calc(100vw+1px)] md:right-[-375px] w-[calc(100vw+1px)] md:w-[375px] h-screen bg-black bg-opacity-90 backdrop-blur-md border-l p-6 ${
+          isOpen ? "-translate-x-[calc(100vw+1px)] md:translate-x-[-375px]" : "translate-x-0"
         } transition-transform ease-in-out duration-500`}
         ref={cartRef}
       >
@@ -277,7 +288,10 @@ export default function Cart() {
               <p>Total</p>
               <p>${getTotal().toFixed(2)}</p>
             </div>
-            <button className='w-full bg-red-600 p-3 rounded-full mt-2'>
+            <button
+              className='w-full bg-red-600 p-3 rounded-full mt-2'
+              onClick={handleCheckout}
+            >
               Proceed to Checkout
             </button>
           </div>

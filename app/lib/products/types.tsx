@@ -12,3 +12,6 @@ export type CartItem = {
     quantity: number;
     size: string;
 }
+export type StripeDictionary = {
+    [key: string]: {[key: string]: string};
+}
